@@ -282,7 +282,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     isLoading,
     refreshEmployeeData,
     loginEmployee,
-    markEmployeeEnrolled
+    markEmployeeEnrolled,
 	bulkUploadEmployees
   };
 

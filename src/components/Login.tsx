@@ -127,7 +127,6 @@ const Login: React.FC = () => {
                 required
                 disabled={loading}
                 placeholder="your.email@company.com"
-                placeholder="your.email@company.com"
               />
             </div>
 
