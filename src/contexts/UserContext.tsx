@@ -65,15 +65,36 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     return dateString;
   };
 
-  // Convert DD/MM/YYYY to YYYY-MM-DD for database
-  const convertDateToDB = (dateString: string): string => {
-    if (!dateString) return '';
-    if (dateString.includes('/')) {
-      const [day, month, year] = dateString.split('/');
-      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-    }
-    return dateString;
-  };
+	// Convert any date format to YYYY-MM-DD for database
+	const convertDateToDB = (dateString: string): string => {
+	  if (!dateString || dateString.trim() === '') return '';
+  
+	  const trimmed = dateString.trim();
+  
+	  // If already in YYYY-MM-DD format, validate and return
+	  if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) {
+	    const date = new Date(trimmed);
+	    if (!isNaN(date.getTime())) {
+	      return trimmed;
+	    }
+	  }
+  
+	  // Handle DD/MM/YYYY format (legacy)
+	  if (trimmed.includes('/')) {
+	    const [day, month, year] = trimmed.split('/');
+	    if (day && month && year) {
+	      const convertedDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+	      const date = new Date(convertedDate);
+	      if (!isNaN(date.getTime())) {
+	        return convertedDate;
+	      }
+	    }
+	  }
+  
+	  // If all else fails, return empty string
+	  console.warn(`Unable to parse date: ${dateString}`);
+	  return '';
+	};
 
   // Initialize data from localStorage
   const initializeData = async () => {
