@@ -253,24 +253,20 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   
   const bulkUploadEmployees = async (employees: Omit<Employee, 'id'>[]): Promise<void> => {
     try {
-      const dbEmployees = employees.map(emp => ({
-        emp_id: emp.emp_id,
-        name: emp.name,
-        email: emp.email,
-        date_of_birth: convertDateToDB(emp.date_of_birth),
-        gender: emp.gender,
-        mobile: emp.mobile,
-        joining_date: convertDateToDB(emp.joining_date),
-        policy_start: convertDateToDB(emp.policy_start),
-        policy_end: convertDateToDB(emp.policy_end),
-        department: emp.department,
-        designation: emp.designation || '',
-        salary: emp.salary || 0,
-        enrolled: false,
-        enrollment_status: 'pending',
-        enrollment_due_date: convertDateToDB(emp.enrollmentDueDate || '31/03/2025'),
-        role: emp.role || 'employee'
-      }));
+	  const dbEmployees = employees.map(emp => ({
+	    emp_id: emp.emp_id,
+	    name: emp.name,
+	    email: emp.email,
+	    date_of_birth: emp.date_of_birth,           // No conversion needed
+	    gender: emp.gender,
+	    mobile: emp.mobile,
+	    joining_date: emp.joining_date,             // No conversion needed
+	    policy_start: emp.policy_start,             // No conversion needed
+	    policy_end: emp.policy_end,                 // No conversion needed
+	    // ... rest of fields
+	    enrollment_due_date: emp.enrollmentDueDate || '2025-03-31',
+	    role: emp.role || 'employee'
+	  }));
     
       const { error } = await supabase
         .from('employees')
