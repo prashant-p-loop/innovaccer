@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Insurance Enrollment Confirmation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #025F4C 0%, #036B56 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .logo-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .innovaccer-logo {
+            height: 40px;
+            width: auto;
+        }
+        .loop-logo {
+            height: 35px;
+            width: auto;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 30px 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            color: #025F4C;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #025F4C;
+            padding-bottom: 5px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .info-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 3px solid #025F4C;
+        }
+        .info-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .info-value {
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+        .member-card {
+            background: #f8f9fa;
+            border-left: 3px solid #025F4C;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .member-name {
+            font-weight: bold;
+            color: #025F4C;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        .member-details {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.4;
+        }
+        .member-details div {
+            margin-bottom: 3px;
+        }
+        .parental-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid #e0e0e0;
+        }
+        .parental-member-card {
+            background: #f0f4ff;
+            border-left: 3px solid #6366f1;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .parental-member-name {
+            font-weight: bold;
+            color: #6366f1;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        .premium-breakdown {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .premium-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .premium-total {
+            border-top: 2px solid #025F4C;
+            padding-top: 10px;
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            color: #025F4C;
+        }
+        .highlight-box {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .highlight-text {
+            color: #2e7d32;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+        }
+        .footer-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        .footer p {
+            margin: 5px 0;
+            font-size: 12px;
+            color: #666;
+        }
+        .contact-info {
+            background: #f0f4ff;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .contact-info h4 {
+            color: #025F4C;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .contact-info p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .email-container {
+                margin: 0;
+                box-shadow: none;
+            }
+            .header {
+                padding: 20px 15px;
+            }
+            .content {
+                padding: 20px 15px;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .logo-section {
+                justify-content: center;
+                gap: 20px;
+            }
+            .premium-row {
+                font-size: 13px;
+            }
+            .footer-logos {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header with Logos -->
+        <div class="header">
+            <div class="logo-section">
+                <img src="{{innovaccer_logo_url}}" alt="Innovaccer" class="innovaccer-logo" />
+                <img src="{{loop_logo_url}}" alt="Loop" class="loop-logo" />
+            </div>
+            <h1>Health Insurance Enrollment Confirmation</h1>
+            <p>Your enrollment has been successfully submitted</p>
+        </div>
+
+        <div class="content">
+            <!-- Employee Information -->
+            <div class="section">
+                <h2 class="section-title">Employee Information</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Employee Name</div>
+                        <div class="info-value">{{employee_name}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Sum Insured</div>
+                        <div class="info-value">₹{{sum_insured_lakhs}} Lakhs</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Joining Date</div>
+                        <div class="info-value">{{joining_date}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Your Premium Share</div>
+                        <div class="info-value">{{employee_share}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enrolled Members Section -->
+            <div class="section">
+                <h2 class="section-title">Enrolled Members</h2>
+                {{enrolled_members_html}}
+            </div>
+
+            <!-- Premium Breakdown (Only shown if there are premiums) -->
+            {{#if employee_share}}
+            {{#unless (eq employee_share "₹0")}}
+            <div class="section">
+                <h2 class="section-title">Premium Breakdown</h2>
+                <div class="premium-breakdown">
+                    <div class="premium-row">
+                        <span>Base Group Medical Coverage:</span>
+                        <span>₹0 (Company Paid)</span>
+                    </div>
+                    {{#if pro_rata_premium}}
+                    <div class="premium-row">
+                        <span>Parental Coverage Premium:</span>
+                        <span>₹{{pro_rata_premium}}</span>
+                    </div>
+                    {{/if}}
+                    {{#if gst}}
+                    <div class="premium-row">
+                        <span>GST (18%):</span>
+                        <span>₹{{gst}}</span>
+                    </div>
+                    {{/if}}
+                    <div class="premium-row premium-total">
+                        <span>Total Annual Premium:</span>
+                        <span>₹{{total_premium}}</span>
+                    </div>
+                    {{#if total_premium}}
+                    {{#unless (eq total_premium "₹0")}}
+                    <div class="premium-row" style="font-size: 13px; color: #666; margin-top: 5px;">
+                        <span>Monthly Deduction:</span>
+                        <span>₹{{monthly_deduction}}</span>
+                    </div>
+                    {{/unless}}
+                    {{/if}}
+                </div>
+            </div>
+            {{/unless}}
+            {{/if}}
+
+            <!-- Company Paid Highlight (Only shown if no premiums) -->
+            {{#if (eq employee_share "₹0")}}
+            <div class="highlight-box">
+                <div class="highlight-text">
+                    🎉 Your health insurance is fully covered by {{client_name}}!
+                </div>
+                <p style="margin: 10px 0 0 0; color: #2e7d32; font-size: 14px;">
+                    No premium deduction from your salary.
+                </p>
+            </div>
+            {{/if}}
+
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <h4>Need Help?</h4>
+                <p><strong>HR Team:</strong> hr@innovaccer.com</p>
+                <p><strong>Loop Support:</strong> support@loophealth.com</p>
+                <p><strong>Claims Helpline:</strong> 1800-123-4567</p>
+            </div>
+
+            <!-- Important Notes -->
+            <div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 6px; padding: 15px; margin: 20px 0;">
+                <h4 style="color: #856404; margin-top: 0;">Important Notes:</h4>
+                <ul style="color: #856404; margin: 0; padding-left: 20px;">
+                    <li>Keep this email for your records</li>
+                    <li>Your enrollment cannot be modified after submission</li>
+                    <li>Contact HR for any urgent queries regarding your enrollment</li>
+                    <li>Download the Loop app for easy claims and policy management</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-logos">
+                <img src="{{innovaccer_logo_url}}" alt="Innovaccer" style="height: 30px;" />
+                <span style="color: #ccc;">×</span>
+                <img src="{{loop_logo_url}}" alt="Loop" style="height: 25px;" />
+            </div>
+            <p><strong>{{client_name}}</strong> - Powered by <strong>Loop</strong></p>
+            <p>This is an automated email. Please do not reply to this email.</p>
+            <p>© {{year}} Loop. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
