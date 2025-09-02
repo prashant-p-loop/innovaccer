@@ -62,9 +62,25 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requireAdmin 
 
   // Check enrollment due date for regular users (not admins)
   if (!requireAdmin && currentEmployee.role !== 'admin' && currentEmployee.enrollmentStatus !== 'submitted') {
-    const dueDate = new Date(currentEmployee.enrollmentDueDate || '31/03/2025');
-    const currentDate = new Date();
+    // Convert DD/MM/YYYY to proper Date object
+    const convertDueDateFormat = (dateStr: string): Date => {
+      if (!dateStr) return new Date('2025-03-31');
     
+      if (dateStr.includes('/')) {
+        const [day, month, year] = dateStr.split('/');
+        return new Date(`${year}-${month}-${day}`);
+      }
+    
+      return new Date(dateStr);
+    };
+
+    const dueDate = convertDueDateFormat(currentEmployee.enrollmentDueDate || '31/03/2025');
+    const currentDate = new Date();
+  
+    // Set times for fair comparison - due date valid until end of day
+    dueDate.setHours(23, 59, 59, 999);
+    currentDate.setHours(0, 0, 0, 0);
+  
     if (currentDate > dueDate) {
       console.log('[ProtectedRoute] Enrollment period ended, redirecting to login');
       return <Navigate to="/login" replace />;
