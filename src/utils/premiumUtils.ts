@@ -130,15 +130,15 @@ export const getPremiumBreakdown = (
   
   const basePremium = parentCount === 1 ? BASE_PARENTAL_RATES.single : BASE_PARENTAL_RATES.double;
   const proRataCalc = calculateProRataPremium(basePremium, joiningDate, policyStartDate, policyEndDate);
-  const gst = proRataCalc.proRatedPremium * 0.18;
+  const gst = Math.round(proRataCalc.proRatedPremium * 0.18);
   const total = proRataCalc.proRatedPremium + gst;
   
   return {
     description: `${parentCount} parent${parentCount > 1 ? 's' : ''} coverage`,
     basePremium,
     proRatedPremium: proRataCalc.proRatedPremium,
-    gst: Math.round(gst),
-    total: Math.round(total),
+    gst: gst,
+    total: total,
     monthlyDeduction: calculateMonthlyDeduction(total),
     factor: proRataCalc.factor,
     remainingDays: proRataCalc.remainingDays
