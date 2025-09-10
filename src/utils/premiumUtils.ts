@@ -58,7 +58,7 @@ export const calculateProRataPremium = (
   
   return {
     basePremium,
-    proRatedPremium: Math.round(proRatedPremium),
+    proRatedPremium: proRatedPremium,
     factor,
     remainingDays,
     totalPolicyDays,
